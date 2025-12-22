@@ -1,6 +1,6 @@
 class AppError extends Error{
-    private statusCode: number;
-    private success: boolean;
+    public statusCode: number;
+    public success: boolean;
     constructor(message:string, statusCode=500){
         super(message);
         this.statusCode = statusCode;
