@@ -17,7 +17,7 @@ export function createKafkaClient(): Kafka {
   return kafka;
 }
 
-export async function getKafkaProducer(): Promise<Producer> {
+export async function createKafkaProducer(): Promise<Producer> {
   //    Our Kafka Producer instance is singleton for our whole app, so no new instance
   //    is created for new request.
   if (!producer) {

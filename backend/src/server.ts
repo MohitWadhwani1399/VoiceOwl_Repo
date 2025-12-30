@@ -13,7 +13,7 @@ export async function startServer(): Promise<void> {
   });
 }
 
-export async function stopServer(): Promise<void>{
+export async function shutdownServer(): Promise<void>{
     if(!server) return;
     await server.close(()=>{
         console.log("Server shutdown gracefully");
