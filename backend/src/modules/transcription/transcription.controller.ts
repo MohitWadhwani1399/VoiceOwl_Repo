@@ -1,4 +1,4 @@
-import { downloadAudioFile, transcribe } from "../utils/audio.utils.js";
+import { downloadAudioFile, transcribe } from "../../utils/audio.utils.js";
 import type { Request,Response } from "express";
 import fs from "fs";
 import path from "path";

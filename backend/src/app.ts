@@ -1,6 +1,6 @@
 import express, {Express} from 'express';
 import cors from 'cors';
-import audioRoutes from './routes/audio.routes.js';
+import audioRoutes from './routes/transcription.routes.js';
 
 const app:Express = express();
 app.use(cors());
