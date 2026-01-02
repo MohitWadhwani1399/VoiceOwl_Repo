@@ -16,10 +16,6 @@ const TranscriptionResultSchema = new Schema<TranscriptionResultDocument>(
       unique: true,
       index: true,
     },
-    audioUrl: {
-      type: String,
-      required: true,
-    },
     transcript: {
       type: String,
       required: true,
