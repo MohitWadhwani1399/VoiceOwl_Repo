@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { createTranscription } from "../modules/transcription/transcription.controller.js";
+import { TranscriptionController } from "../modules/transcription/transcription.controller.js";
 
 const router = Router();
-router.post("/", createTranscription);
+const controller = new TranscriptionController();
+router.post("/", controller.createTranscription.bind(controller));
 //router.get('/transcription',getTranscription);
 
 export default router;
