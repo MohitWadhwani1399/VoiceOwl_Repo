@@ -13,7 +13,7 @@ export class TranscritptionRepository {
   }
 
   async findJob(jobId: string) {
-    return TranscriptionModel.find({
+    return TranscriptionModel.findOne({
       jobId,
     });
   }
