@@ -42,7 +42,7 @@ export async function startTranscriptionConsumer() {
 
       // Below function will do the actual transcription process.
       try {
-        const transcriptText = await processTranscription({ jobId, audioUrl });
+        const transcriptText = await processTranscription(payload);
         await repo.markCompleted(jobId, transcriptText);
         await commitOffset(consumer, topic, partition, message.offset);
       } catch (error: any) {
@@ -66,17 +66,3 @@ async function commitOffset(
     },
   ]);
 }
-
-// Kafka message received
-//         ↓
-// Check job status in MongoDB
-//         ↓
-// Already COMPLETED? → commit offset → skip
-//         ↓
-// Atomically mark PROCESSING
-//         ↓
-// Run transcription (CPU heavy)
-//         ↓
-// Success → save result → mark COMPLETED → commit offset
-//         ↓
-// Failure → mark FAILED / retry → DO NOT commit offset

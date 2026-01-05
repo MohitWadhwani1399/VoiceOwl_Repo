@@ -3,8 +3,6 @@ import { createKafkaProducer } from "../index.js";
 import { TranscriptionRequestedEvent } from "../messageTypes.js";
 import { KAFKA_TOPICS } from "../topics.js";
 
-const producer = kafka.producer();
-
 export async function publishTranscription(
   payload: TranscriptionRequestedEvent
 ) {
