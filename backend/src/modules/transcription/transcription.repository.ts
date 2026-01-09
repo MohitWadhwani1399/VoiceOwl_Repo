@@ -50,4 +50,10 @@ export class TranscritptionRepository {
       }
     );
   }
+
+  async getLast30daysTransciptions(){
+    return TranscriptionResultModel.find({
+      createdAt: {$gte : Date.now()-30}
+    }).sort();
+  }
 }

@@ -4,6 +4,6 @@ import { TranscriptionController } from "../modules/transcription/transcription.
 const router = Router();
 const controller = new TranscriptionController();
 router.post("/", controller.createTranscription.bind(controller));
-//router.get('/transcription',getTranscription);
+router.get('/',controller.getTranscription.bind(controller));
 
 export default router;

@@ -17,4 +17,8 @@ export class TranscriptionService {
       status: TranscriptionState.PENDING,
     };
   }
+
+  async getTranscriptions(){
+    await this.repo.getLast30daysTransciptions();
+  }
 }
