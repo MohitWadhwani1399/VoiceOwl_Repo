@@ -30,12 +30,18 @@ export class TranscriptionController {
       res.status(500).send("Server error");
     }
   }
-   async getTranscription(req: Request, res: Response) {    
+  async getTranscription(req: Request, res: Response) {
+    const limit = parseInt(req.query.limit as string);
+    const cursor = req.query.cursor as string;
+
     try {
-      const transcriptions = await transcriptionService.getTranscriptions();
+      const transcriptions = await transcriptionService.getTranscriptions(
+        limit,
+        cursor
+      );
       return res.status(200).json(transcriptions);
     } catch (error) {
       res.status(500).send("Server Error");
     }
-  };
+  }
 }

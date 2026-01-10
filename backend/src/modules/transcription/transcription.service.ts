@@ -18,7 +18,25 @@ export class TranscriptionService {
     };
   }
 
-  async getTranscriptions(){
-    await this.repo.getLast30daysTransciptions();
+  async getTranscriptions(limit = 20, cursor: string) {
+    const maxLimit = Math.min(limit, 50);
+    const thirtyDaysAgoDate: Date = new Date();
+    thirtyDaysAgoDate.setDate(new Date().getDate() - 30);
+    const cursorDate = cursor ? new Date(cursor) : new Date();
+    const transcriptions = await this.repo.getLast30daysTransciptions(
+      thirtyDaysAgoDate,
+      maxLimit,
+      cursorDate
+    );
+
+    const nextCursor =
+      transcriptions.length > 0
+        ? transcriptions[transcriptions.length - 1].createdAt
+        : null;
+    return {
+      data: transcriptions,
+      nextCursor,
+      limit: maxLimit,
+    };
   }
 }

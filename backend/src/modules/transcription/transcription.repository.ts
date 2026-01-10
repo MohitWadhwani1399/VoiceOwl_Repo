@@ -51,9 +51,23 @@ export class TranscritptionRepository {
     );
   }
 
-  async getLast30daysTransciptions(){
-    return TranscriptionResultModel.find({
-      createdAt: {$gte : Date.now()-30}
-    }).sort();
+  async getLast30daysTransciptions(since:Date,maxLimit:number,cursorDate:Date){
+    const query: any = {
+      createdAt: {$gt : since}
+    }
+    if(cursorDate){
+      query.createdAt.$lt = cursorDate;
+    }
+
+    return TranscriptionResultModel.find(query)
+    .sort({createdAt:-1}) //index at createdAt column
+    .limit(maxLimit)
+    .select({
+      _id:0,
+      jobId:1,
+      transcript:1,
+      createdAt:1
+    })
+    .lean(); // Return JS object instead of mongodb Object which reduces memory usage
   }
 }
